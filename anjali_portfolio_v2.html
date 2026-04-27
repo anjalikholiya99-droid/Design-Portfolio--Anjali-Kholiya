@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjali Kholiya — Graphic Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #3D2B8F;
+    --purple-mid: #6B52C8;
+    --purple-light: #EDE9FF;
+    --peach: #E8926A;
+    --peach-light: #FFF0E8;
+    --dark: #1A1A2E;
+    --gray: #6B7280;
+    --light: #F9F7FF;
+    --white: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(61,43,143,0.08);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--purple); }
+  .nav-logo span { color: var(--peach); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--gray); letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--purple); }
+
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    background: linear-gradient(135deg, #F9F7FF 0%, #FFF0E8 100%);
+    position: relative; overflow: hidden;
+  }
+  #hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(107,82,200,0.12) 0%, transparent 70%); }
+  .hero-content { max-width: 700px; position: relative; z-index: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid rgba(61,43,143,0.15); border-radius: 999px; padding: 6px 16px; font-size: 0.78rem; font-weight: 500; color: var(--purple); margin-bottom: 2rem; letter-spacing: 0.06em; }
+  .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+  .hero-role { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--peach); font-weight: 500; margin-bottom: 0.75rem; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5rem); line-height: 1.08; color: var(--dark); margin-bottom: 1.5rem; }
+  .hero-name span { color: var(--purple); }
+  .hero-bio { font-size: 1.05rem; line-height: 1.8; color: var(--gray); max-width: 520px; margin-bottom: 2.5rem; }
+  .hero-bio strong { color: var(--dark); font-weight: 500; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; }
+  .tag { font-size: 0.78rem; padding: 5px 14px; border-radius: 999px; border: 1px solid rgba(61,43,143,0.2); color: var(--purple); background: var(--purple-light); font-weight: 500; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--purple); color: white; padding: 12px 28px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary:hover { background: var(--purple-mid); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--dark); padding: 12px 28px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(0,0,0,0.2); transition: border-color 0.2s, transform 0.15s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--purple); transform: translateY(-1px); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(61,43,143,0.1); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--purple); }
+  .stat-label { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--peach); font-weight: 500; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.8rem); color: var(--dark); margin-bottom: 0.5rem; }
+  .section-title span { color: var(--purple); }
+  .section-sub { color: var(--gray); font-size: 0.95rem; max-width: 480px; line-height: 1.7; margin-bottom: 3.5rem; }
+
+  #skills { background: var(--light); }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+  .tool-card { background: var(--white); border: 1px solid rgba(61,43,143,0.1); border-radius: 14px; padding: 1.5rem 1rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+  .tool-card:hover { border-color: var(--purple-mid); transform: translateY(-3px); }
+  .tool-icon { width: 48px; height: 48px; border-radius: 12px; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; }
+  .tool-name { font-size: 0.82rem; font-weight: 500; color: var(--dark); }
+
+  #clients { background: var(--white); }
+  .clients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .client-card { border: 1px solid rgba(61,43,143,0.1); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; background: var(--light); transition: border-color 0.2s, background 0.2s; min-height: 80px; }
+  .client-card:hover { border-color: var(--peach); background: var(--peach-light); }
+  .client-name { font-weight: 500; font-size: 0.88rem; color: var(--dark); text-align: center; }
+
+  /* WORK SECTION */
+  #work { background: var(--light); }
+  .work-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .filter-btn { padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(61,43,143,0.2); background: transparent; font-size: 0.82rem; color: var(--gray); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+  /* BRAND CARD — clickable */
+  .brand-card {
+    background: var(--white); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(61,43,143,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .brand-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(61,43,143,0.14); }
+  .brand-cover {
+    position: relative; aspect-ratio: 4/3; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-cover-inner {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+  }
+  .brand-emoji { font-size: 2.8rem; }
+  .brand-cover-name { font-weight: 700; font-size: 1rem; color: rgba(255,255,255,0.95); letter-spacing: 0.04em; text-align: center; }
+  .brand-post-count {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.45); color: white;
+    font-size: 0.72rem; font-weight: 500;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  /* Annotation */
+  .annotation {
+    position: absolute; background: white;
+    border: 1.5px solid var(--purple); border-radius: 8px;
+    padding: 5px 9px; font-size: 0.68rem; font-weight: 600;
+    color: var(--purple); line-height: 1.3; max-width: 120px; z-index: 5;
+    box-shadow: 0 4px 12px rgba(61,43,143,0.15);
+  }
+  .annotation.ann-tl { top: 14px; left: 10px; }
+  .annotation.ann-br { bottom: 14px; right: 10px; }
+  .annotation.ann-tr { top: 14px; right: 10px; }
+  .annotation.ann-bl { bottom: 14px; left: 10px; }
+  .ann-arrow {
+    position: absolute; width: 22px; height: 22px; z-index: 4;
+  }
+
+  .brand-info { padding: 1.1rem 1.25rem; }
+  .brand-client-label { font-size: 0.72rem; color: var(--peach); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .brand-title { font-weight: 500; font-size: 0.98rem; color: var(--dark); margin: 3px 0 6px; }
+  .brand-meta { display: flex; gap: 8px; align-items: center; }
+  .brand-type { font-size: 0.72rem; color: var(--gray); background: var(--light); border-radius: 999px; padding: 3px 10px; }
+  .view-gallery-hint {
+    font-size: 0.72rem; color: var(--purple); font-weight: 500;
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .brand-card.hidden { display: none; }
+
+  /* ===== LIGHTBOX / GALLERY MODAL ===== */
+  #galleryModal {
+    display: none;
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(20, 16, 40, 0.92);
+    backdrop-filter: blur(8px);
+    align-items: flex-start; justify-content: center;
+    overflow-y: auto; padding: 2rem 1rem;
+  }
+  #galleryModal.open { display: flex; }
+
+  .modal-box {
+    background: var(--white); border-radius: 20px;
+    width: 100%; max-width: 900px;
+    margin: auto; overflow: hidden;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(61,43,143,0.1);
+  }
+  .modal-brand-info { display: flex; align-items: center; gap: 12px; }
+  .modal-brand-dot { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .modal-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--dark); }
+  .modal-brand-sub { font-size: 0.78rem; color: var(--gray); }
+  .modal-close {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(61,43,143,0.15);
+    background: var(--light); cursor: pointer;
+    font-size: 1.1rem; color: var(--gray);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--purple-light); color: var(--purple); }
+
+  .modal-gallery {
+    padding: 1.5rem 2rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .gallery-item {
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid rgba(61,43,143,0.08);
+    background: var(--light);
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .gallery-item:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(61,43,143,0.15); }
+  .gallery-img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover;
+    display: block; background: var(--light);
+  }
+  /* Placeholder when no real image */
+  .gallery-placeholder {
+    width: 100%; aspect-ratio: 1/1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; padding: 1rem;
+    font-size: 0.75rem; font-weight: 500;
+    text-align: center; line-height: 1.4;
+  }
+  .gallery-placeholder .img-emoji { font-size: 2rem; }
+  .gallery-item-label {
+    padding: 8px 10px;
+    font-size: 0.72rem; font-weight: 500; color: var(--gray);
+    border-top: 1px solid rgba(61,43,143,0.06);
+    background: white;
+  }
+
+  /* Replace hint bar */
+  .modal-hint {
+    margin: 0 2rem 1.5rem;
+    background: var(--purple-light);
+    border: 1px dashed var(--purple-mid);
+    border-radius: 10px; padding: 10px 16px;
+    font-size: 0.78rem; color: var(--purple);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Fullscreen image viewer */
+  #imgViewer {
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.95);
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+  }
+  #imgViewer.open { display: flex; }
+  #viewerImg { max-width: 90vw; max-height: 82vh; border-radius: 8px; object-fit: contain; }
+  .viewer-close { position: absolute; top: 1.5rem; right: 2rem; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 1.5rem; cursor: pointer; border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; }
+  .viewer-nav { display: flex; gap: 1rem; }
+  .viewer-btn { background: rgba(255,255,255,0.1); border: none; color: white; font-size: 1.1rem; cursor: pointer; border-radius: 8px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+  .viewer-btn:hover { background: rgba(255,255,255,0.2); }
+
+  #contact { background: var(--dark); color: white; text-align: center; }
+  #contact .section-title { color: white; }
+  #contact .section-sub { color: rgba(255,255,255,0.55); margin: 0 auto 2.5rem; }
+  .contact-grid { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .contact-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 20px; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+  .contact-cta { background: linear-gradient(135deg, var(--purple-mid), var(--peach)); color: white; border: none; padding: 14px 36px; border-radius: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block; transition: opacity 0.2s, transform 0.15s; }
+  .contact-cta:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  footer { padding: 1.5rem 4rem; background: #111122; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-logo { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.5); }
+  .footer-logo span { color: var(--peach); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.6s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+  .hero-content > *:nth-child(6) { animation-delay: 0.6s; }
+  .hero-content > *:nth-child(7) { animation-delay: 0.7s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Anjali <span>Kholiya</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>Available for new projects</div>
+    <p class="hero-role">Graphic Designer · Social Media & Brand Identity</p>
+    <h1 class="hero-name">Anjali<br><span>Kholiya</span></h1>
+    <p class="hero-bio">Crafting <strong>visually strong, brand-consistent</strong> designs for social media and identity — with 2+ years building brands that stop the scroll. Proficient in Adobe Creative Suite & Figma, with a growing focus on conversion-first UI/UX.</p>
+    <div class="hero-tags">
+      <span class="tag">Social Media Creatives</span>
+      <span class="tag">Brand Identity</span>
+      <span class="tag">Adobe Suite</span>
+      <span class="tag">Figma</span>
+      <span class="tag">UI/UX ↗</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">2+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">11</div><div class="stat-label">Brands Served</div></div>
+      <div><div class="stat-num">5</div><div class="stat-label">Design Tools</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">Toolkit</p>
+  <h2 class="section-title">Tools I Work <span>With</span></h2>
+  <p class="section-sub">Every great design starts with the right tools — here's what powers my creative process.</p>
+  <div class="tools-grid">
+    <div class="tool-card"><div class="tool-icon" style="background:#001E36;border-radius:10px;"><svg width="28" height="20" viewBox="0 0 28 20"><text x="14" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#31A8FF" font-family="Arial">Ps</text></svg></div><div class="tool-name">Photoshop</div></div>
+    <div class="tool-card"><div class="tool-icon" style="background:#330000;border-radius:10px;"><svg width="28" height="20" viewBox="0 0 28 20"><text x="14" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF9A00" font-family="Arial">Ai</text></svg></div><div class="tool-name">Illustrator</div></div>
+    <div class="tool-card"><div class="tool-icon" style="background:#00005B;border-radius:10px;"><svg width="28" height="20" viewBox="0 0 28 20"><text x="14" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#9999FF" font-family="Arial">Pr</text></svg></div><div class="tool-name">Premiere Pro</div></div>
+    <div class="tool-card"><div class="tool-icon" style="background:#1a3d1a;border-radius:10px;"><svg width="28" height="20" viewBox="0 0 28 20"><text x="14" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#6DC066" font-family="Arial">CDr</text></svg></div><div class="tool-name">CorelDRAW</div></div>
+    <div class="tool-card"><div class="tool-icon" style="background:#1E1E1E;border-radius:10px;padding:4px;"><svg width="28" height="24" viewBox="0 0 28 24"><circle cx="9" cy="9" r="5" fill="#F24E1E" opacity="0.9"/><circle cx="19" cy="9" r="5" fill="#FF7262" opacity="0.9"/><circle cx="9" cy="17" r="5" fill="#A259FF" opacity="0.9"/><circle cx="19" cy="17" r="5" fill="#1ABCFE" opacity="0.9"/></svg></div><div class="tool-name">Figma</div></div>
+  </div>
+</section>
+
+<section id="clients">
+  <p class="section-label">Experience</p>
+  <h2 class="section-title">Brands I've <span>Worked With</span></h2>
+  <p class="section-sub">Diverse industries — from food & fashion to healthcare and real estate.</p>
+  <div class="clients-grid">
+    <div class="client-card"><div class="client-name">🐯 Yellow Tiger<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Food & Spices</span></div></div>
+    <div class="client-card"><div class="client-name">🔩 FixFlate<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Construction</span></div></div>
+    <div class="client-card"><div class="client-name">🤝 BNI Amber<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Networking</span></div></div>
+    <div class="client-card"><div class="client-name">👗 Marudhaga<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Fashion</span></div></div>
+    <div class="client-card"><div class="client-name">🍯 Sudha Honey<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Natural Products</span></div></div>
+    <div class="client-card"><div class="client-name">🏥 MH Surgery<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Healthcare</span></div></div>
+    <div class="client-card"><div class="client-name">💎 JewelsRaga<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Jewellery</span></div></div>
+    <div class="client-card"><div class="client-name">🏠 IRS Dream<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Real Estate</span></div></div>
+    <div class="client-card"><div class="client-name">💻 JSB Infotech<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Tech</span></div></div>
+    <div class="client-card"><div class="client-name">🏨 Ryokan AJU<br><span style="font-size:0.72rem;color:#888;font-weight:400;">Hospitality</span></div></div>
+  </div>
+</section>
+
+<section id="work">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Selected <span>Work</span></h2>
+  <p class="section-sub">Click any brand to see the full project gallery.</p>
+
+  <div class="work-filter">
+    <button class="filter-btn active" onclick="filterWork('all',this)">All</button>
+    <button class="filter-btn" onclick="filterWork('social',this)">Social Media</button>
+    <button class="filter-btn" onclick="filterWork('brand',this)">Brand Identity</button>
+    <button class="filter-btn" onclick="filterWork('banner',this)">Banners</button>
+    <button class="filter-btn" onclick="filterWork('event',this)">Events</button>
+  </div>
+
+  <div class="work-grid" id="workGrid">
+
+    <!-- YELLOW TIGER -->
+    <div class="brand-card" data-cat="social brand" onclick="openGallery('yellow-tiger')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#1a1a1a 30%,#f5a623);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🐯</div>
+          <div class="brand-cover-name">Yellow Tiger</div>
+        </div>
+        <div class="brand-post-count">8 posts</div>
+        <div class="annotation ann-tl">Bold product-centred<br>scroll-stop layout</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">Yellow Tiger</div>
+        <div class="brand-title">Spice & Masala Social Series</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social Media</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIXFLATE -->
+    <div class="brand-card" data-cat="social" onclick="openGallery('fixflate')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#8B1A1A,#2C3E90 60%,#1D6A54);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🔩</div>
+          <div class="brand-cover-name">FixFlate</div>
+        </div>
+        <div class="brand-post-count">8 posts</div>
+        <div class="annotation ann-br">Festival + product<br>in one frame</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">FixFlate</div>
+        <div class="brand-title">Tile Adhesive Campaign</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social Media</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BNI AMBER -->
+    <div class="brand-card" data-cat="social event" onclick="openGallery('bni')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#1a1a3e,#C0392B);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🤝</div>
+          <div class="brand-cover-name">BNI Amber</div>
+        </div>
+        <div class="brand-post-count">6 posts</div>
+        <div class="annotation ann-tl">Dark cinematic<br>builds exclusivity</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">BNI Amber</div>
+        <div class="brand-title">Networking Event Creatives</div>
+        <div class="brand-meta">
+          <span class="brand-type">Event · Social</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARUDHAGA -->
+    <div class="brand-card" data-cat="social brand banner" onclick="openGallery('marudhaga')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#FFF0E8,#D4B896);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">👗</div>
+          <div class="brand-cover-name" style="color:#4A2F1A;">Marudhaga</div>
+        </div>
+        <div class="brand-post-count">10 posts</div>
+        <div class="annotation ann-br" style="color:#4A2F1A;border-color:#4A2F1A;">Soft editorial tone<br>matches brand story</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">Marudhaga</div>
+        <div class="brand-title">Fashion Collection + Banners</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social · Brand · Banner</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUDHA HONEY -->
+    <div class="brand-card" data-cat="social brand" onclick="openGallery('sudha')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#1a1200,#C9902A);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🍯</div>
+          <div class="brand-cover-name">Sudha Honey</div>
+        </div>
+        <div class="brand-post-count">9 posts</div>
+        <div class="annotation ann-tl">Warm golden tones<br>convey purity</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">Sudha Honey</div>
+        <div class="brand-title">Natural Product Creatives + Logo</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social · Brand</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MH SURGERY -->
+    <div class="brand-card" data-cat="social brand" onclick="openGallery('mh')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#0A2472,#C9902A);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🏥</div>
+          <div class="brand-cover-name">MH Surgery</div>
+        </div>
+        <div class="brand-post-count">6 posts</div>
+        <div class="annotation ann-br">Clean blue builds<br>trust & authority</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">MH Surgery Clinics</div>
+        <div class="brand-title">Healthcare Social + Logos</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social · Brand</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JEWELSRAGA -->
+    <div class="brand-card" data-cat="social" onclick="openGallery('jewelsraga')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#4A1942,#D4A017);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">💎</div>
+          <div class="brand-cover-name">JewelsRaga</div>
+        </div>
+        <div class="brand-post-count">6 posts</div>
+        <div class="annotation ann-tl">Gold typography<br>signals luxury</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">JewelsRaga</div>
+        <div class="brand-title">Jewellery Festival Posts</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social Media</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IRS DREAM -->
+    <div class="brand-card" data-cat="social brand" onclick="openGallery('irs')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#1a0030,#E91E8C 60%,#FF8C42);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🏠</div>
+          <div class="brand-cover-name">IRS Dream</div>
+        </div>
+        <div class="brand-post-count">8 posts</div>
+        <div class="annotation ann-br">Hindi copy drives<br>local conversions</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">IRS Dream</div>
+        <div class="brand-title">Real Estate Ad Campaign</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social · Brand</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSB INFOTECH -->
+    <div class="brand-card" data-cat="social brand" onclick="openGallery('jsb')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#0A3D91,#FF8C00);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">💻</div>
+          <div class="brand-cover-name">JSB Infotech</div>
+        </div>
+        <div class="brand-post-count">8 posts</div>
+        <div class="annotation ann-tl">Bold blue signals<br>digital expertise</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">JSB Global Infotech</div>
+        <div class="brand-title">Tech Service Promotions</div>
+        <div class="brand-meta">
+          <span class="brand-type">Social · Brand</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RYOKAN AJU -->
+    <div class="brand-card" data-cat="banner social" onclick="openGallery('aju')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#8B0000,#003366);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">🏨</div>
+          <div class="brand-cover-name">Ryokan AJU</div>
+        </div>
+        <div class="brand-post-count">4 variants</div>
+        <div class="annotation ann-br">4 color variants<br>for A/B testing</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">Ryokan AJU Hotel</div>
+        <div class="brand-title">Restaurant Opening Banners</div>
+        <div class="brand-meta">
+          <span class="brand-type">Banners · Social</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAVE THE DATE -->
+    <div class="brand-card" data-cat="event" onclick="openGallery('savedate')">
+      <div class="brand-cover" style="background:linear-gradient(135deg,#3D2B8F,#E8926A);">
+        <div class="brand-cover-inner">
+          <div class="brand-emoji">💍</div>
+          <div class="brand-cover-name">Save The Date</div>
+        </div>
+        <div class="brand-post-count">2 posts</div>
+        <div class="annotation ann-tl">Story countdown<br>keeps audience hooked</div>
+      </div>
+      <div class="brand-info">
+        <div class="brand-client-label">Personal Event</div>
+        <div class="brand-title">Wedding Save The Date</div>
+        <div class="brand-meta">
+          <span class="brand-type">Event Design</span>
+          <span class="view-gallery-hint">View gallery →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label" style="color:var(--peach);">Let's Connect</p>
+  <h2 class="section-title">Ready to Build<br><span>Something Great?</span></h2>
+  <p class="section-sub">Open to freelance projects, collaborations, and full-time opportunities.</p>
+  <div class="contact-grid">
+    <div class="contact-item"><span>✉</span> anjalikholiya.99@gmail.com</div>
+    <div class="contact-item"><span>📞</span> +91 8949803761</div>
+  </div>
+  <a href="mailto:anjalikholiya.99@gmail.com" class="contact-cta">Send a Message →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Anjali <span>Kholiya</span></div>
+  <div>© 2025 · Graphic Designer · Jaipur, India</div>
+</footer>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" onclick="handleModalClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-brand-info">
+        <div class="modal-brand-dot" id="modalDot"></div>
+        <div>
+          <div class="modal-brand-name" id="modalBrandName"></div>
+          <div class="modal-brand-sub" id="modalBrandSub"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeGallery()">✕</button>
+    </div>
+    <div class="modal-hint">
+      💡 <strong>How to add your images:</strong> Open this HTML file in Notepad/VS Code → find the brand name → replace <code>YOUR_IMAGE_PATH_HERE</code> with your actual image file path or URL.
+    </div>
+    <div class="modal-gallery" id="modalGallery"></div>
+  </div>
+</div>
+
+<!-- IMAGE VIEWER -->
+<div id="imgViewer" onclick="closeViewer()">
+  <button class="viewer-close" onclick="closeViewer()">✕</button>
+  <img id="viewerImg" src="" alt="">
+  <div class="viewer-nav">
+    <button class="viewer-btn" onclick="event.stopPropagation(); changeImg(-1)">← Prev</button>
+    <button class="viewer-btn" onclick="event.stopPropagation(); changeImg(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+// =============================================
+// BRAND DATA — Replace image paths here!
+// =============================================
+const brands = {
+  'yellow-tiger': {
+    name: 'Yellow Tiger',
+    sub: 'Food & Spices · Social Media',
+    emoji: '🐯',
+    bg: '#f5a623',
+    posts: [
+      { label: 'Sambhar Masala Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Bhai Dooj Festival Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Kitchen King Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Tea Masala Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Coriander Powder Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Pav Bhaji Masala Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Jarasa Chilli Pickle Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Garam Masala Post', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'fixflate': {
+    name: 'FixFlate',
+    sub: 'Tile Adhesive · Social Media',
+    emoji: '🔩',
+    bg: '#2C3E90',
+    posts: [
+      { label: 'Navratri Festival Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: "Children's Day Post", img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Gandhi Jayanti Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Bhai Dooj Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Diwali Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Govardhan Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Product Range Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Grey Silver Adhesive', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'bni': {
+    name: 'BNI Amber',
+    sub: 'Business Networking · Social Media',
+    emoji: '🤝',
+    bg: '#C0392B',
+    posts: [
+      { label: 'Handshake Meeting Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Jai Veeru Collab Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Network Growth Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: "Children's Day Post", img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'KBC Special Edition', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Happy Diwali Post', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'marudhaga': {
+    name: 'Marudhaga',
+    sub: 'Fashion Brand · Social + Banners + Logo',
+    emoji: '👗',
+    bg: '#D4B896',
+    posts: [
+      { label: 'Candy Floss Anarkali', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Dressed Up Just Enough', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Neerja Sky Blue Set', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Kanshi Phool Set', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Desi Moodboard Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Gulposh Cotton Dress', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Happy Holi Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: "Women's Day Post", img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'YouTube Banner 1', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'YouTube Banner 2', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'sudha': {
+    name: 'Sudha Honey',
+    sub: 'Natural Products · Social + Logo',
+    emoji: '🍯',
+    bg: '#C9902A',
+    posts: [
+      { label: "Women's Day Post", img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Merry Christmas Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Myths or Facts Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Did You Know Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Nature\'s Shield Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Harvested with Care Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Sweetness That Nourishes', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Stronger Immunity Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Sudha Honey Logo', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'mh': {
+    name: 'MH Surgery Clinics',
+    sub: 'Healthcare · Social + Logo',
+    emoji: '🏥',
+    bg: '#0A2472',
+    posts: [
+      { label: 'Hernia Awareness Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Gastritis Info Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Gall Bladder Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Robotic Surgery Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Gastro Diet Tips Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Facts vs Myths Post', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'jewelsraga': {
+    name: 'JewelsRaga',
+    sub: 'Jewellery Brand · Social Media',
+    emoji: '💎',
+    bg: '#D4A017',
+    posts: [
+      { label: 'New Collection Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Shubh Dhanteras Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Majestic Campaign Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Bhai Dooj Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Festive Jamboree Collab', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Umraav Collection Post', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'irs': {
+    name: 'IRS Dream',
+    sub: 'Real Estate · Social + Logo',
+    emoji: '🏠',
+    bg: '#E91E8C',
+    posts: [
+      { label: 'Jaisalmer Royal Tour Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Shyam Sarovar Project', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Demand & Urgency Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Residential Plots Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Govt Approved Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Ring Road Corridor Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Kam Budget Plot Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Tezi se Badhta Kshetra', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'jsb': {
+    name: 'JSB Global Infotech',
+    sub: 'Tech Services · Social + Logo',
+    emoji: '💻',
+    bg: '#0A3D91',
+    posts: [
+      { label: 'Black Friday Sale Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'E-Commerce Dev Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Graphic Design Services', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Black Friday Ecom Ad', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Performance Marketing', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Website + SEO + Ads Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Custom Software Post', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Custom Web Dev Post', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'aju': {
+    name: 'Ryokan AJU Hotel',
+    sub: 'Hospitality · Restaurant Banners',
+    emoji: '🏨',
+    bg: '#8B0000',
+    posts: [
+      { label: 'Red Color Variant', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Blue Color Variant', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Green Color Variant', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: 'Maroon Color Variant', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  },
+  'savedate': {
+    name: 'Save The Date',
+    sub: 'Wedding · Event Design',
+    emoji: '💍',
+    bg: '#3D2B8F',
+    posts: [
+      { label: '2 Months To Go Story', img: 'YOUR_IMAGE_PATH_HERE' },
+      { label: '20 Days Countdown', img: 'YOUR_IMAGE_PATH_HERE' },
+    ]
+  }
+};
+
+let currentImgs = [];
+let currentImgIndex = 0;
+
+function openGallery(brandKey) {
+  const brand = brands[brandKey];
+  if (!brand) return;
+
+  document.getElementById('modalBrandName').textContent = brand.name;
+  document.getElementById('modalBrandSub').textContent = brand.sub;
+  const dot = document.getElementById('modalDot');
+  dot.textContent = brand.emoji;
+  dot.style.background = brand.bg + '22';
+
+  const gallery = document.getElementById('modalGallery');
+  gallery.innerHTML = '';
+  currentImgs = [];
+
+  brand.posts.forEach((post, i) => {
+    currentImgs.push(post.img);
+    const isPlaceholder = post.img === 'YOUR_IMAGE_PATH_HERE';
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.onclick = () => openViewer(i);
+
+    if (isPlaceholder) {
+      item.innerHTML = `
+        <div class="gallery-placeholder" style="background:${brand.bg}18;">
+          <div class="img-emoji">${brand.emoji}</div>
+          <div style="color:#555;font-size:0.72rem;">${post.label}</div>
+          <div style="color:#aaa;font-size:0.65rem;margin-top:4px;">Add image path in HTML</div>
+        </div>
+        <div class="gallery-item-label">${post.label}</div>`;
+    } else {
+      item.innerHTML = `
+        <img class="gallery-img" src="${post.img}" alt="${post.label}" loading="lazy">
+        <div class="gallery-item-label">${post.label}</div>`;
+    }
+    gallery.appendChild(item);
+  });
+
+  document.getElementById('galleryModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGallery() {
+  document.getElementById('galleryModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('galleryModal')) closeGallery();
+}
+
+function openViewer(index) {
+  const img = currentImgs[index];
+  if (!img || img === 'YOUR_IMAGE_PATH_HERE') return;
+  currentImgIndex = index;
+  document.getElementById('viewerImg').src = img;
+  document.getElementById('imgViewer').classList.add('open');
+}
+
+function closeViewer() {
+  document.getElementById('imgViewer').classList.remove('open');
+}
+
+function changeImg(dir) {
+  currentImgIndex = (currentImgIndex + dir + currentImgs.length) % currentImgs.length;
+  const img = currentImgs[currentImgIndex];
+  if (img && img !== 'YOUR_IMAGE_PATH_HERE') {
+    document.getElementById('viewerImg').src = img;
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeGallery(); closeViewer(); }
+  if (e.key === 'ArrowLeft') changeImg(-1);
+  if (e.key === 'ArrowRight') changeImg(1);
+});
+
+function filterWork(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.brand-card').forEach(card => {
+    const cats = card.dataset.cat || '';
+    card.classList.toggle('hidden', cat !== 'all' && !cats.includes(cat));
+  });
+}
+</script>
+</body>
+</html>
